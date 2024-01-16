@@ -25,21 +25,6 @@ Install-Module -Name AudioDeviceCmdlets
 ```
 from your_module_name import DefaultPlayback
 
-# Create an instance of DefaultPlayback
-default_playback = DefaultPlayback()
-
-# Get the default playback device as <AudioDevice>
-default_device = default_playback.get_default_device()
-
-# Get a list of all enabled devices as <AudioDevice>
-device_list = default_device.get_audio_device_list()
-
-# Get the device with the Index corresponding to the given <int>
-device_info = default_device.get_audio_device_by_index(index)
-
-# Get the device with the ID corresponding to the given <string>
-device_info = default_device.get_audio_device_by_id(id)
-
 # Get the default playback device's mute state as <bool>
 is_mute = default_playback.get_is_mute()
 
@@ -55,6 +40,25 @@ default_playback.set_mute(True)
 # Set the default playback device's volume level on 100 to the given <float>
 default_playback.set_volume(0.5)
 
+```
+
+```
+from pyaudiodevice.common import Common
+
+# Create an instance of DefaultPlayback
+common = Common()
+
+# Get the default playback device as <AudioDevice>
+default_device = common.get_default_device()
+
+# Get a list of all enabled devices as <AudioDevice>
+device_list = common.get_audio_device_list()
+
+# Get the device with the Index corresponding to the given <int>
+device_info = common.get_audio_device_by_index(index)
+
+# Get the device with the ID corresponding to the given <string>
+device_info = common.get_audio_device_by_id(id)
 ```
 
 
