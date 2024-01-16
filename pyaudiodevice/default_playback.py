@@ -41,7 +41,7 @@ class DefaultPlayback(PyAudioDeviceCmdlets):
     Set the default playback device's mute state to the opposite of its current mute state
     '''
 
-    def toggle_playback_device_mute(self):
+    def toggle_mute(self):
         powershell_command = "Set-AudioDevice -PlaybackMuteToggle"
         self._exec_powershell(f"{self._import} {powershell_command}")
 
@@ -49,7 +49,7 @@ class DefaultPlayback(PyAudioDeviceCmdlets):
     Set the default playback device's mute state to the given <bool>
     '''
 
-    def set_playback_device_mute(self, mute: bool):
+    def set_mute(self, mute: bool):
         powershell_command = f'''Set-AudioDevice -PlaybackMute ${str(mute).lower()}'''
         self._exec_powershell(f"{self._import} {powershell_command}")
 
@@ -57,6 +57,6 @@ class DefaultPlayback(PyAudioDeviceCmdlets):
     Set the default playback device's volume level on 100 to the given <float>
     '''
 
-    def set_playback_device_volume(self, volume: float):
+    def set_volume(self, volume: float):
         powershell_command = f"Set-AudioDevice -PlaybackVolume {volume}"
         self._exec_powershell(f"{self._import} {powershell_command}")
