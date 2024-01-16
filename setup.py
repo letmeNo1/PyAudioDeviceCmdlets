@@ -1,11 +1,13 @@
 import setuptools
 
-with open("README.md", "r",encoding='UTF-8') as fh:
+with open("README.md", "r", encoding='UTF-8') as fh:
     long_description = fh.read()
+
 
 def parse_requirements(filename):
     lineiter = (line.strip() for line in open(filename))
     return [line for line in lineiter if line and not line.startswith("#")]
+
 
 setuptools.setup(
     name="pyaudiodevice",
@@ -18,7 +20,7 @@ setuptools.setup(
     url="https://github.com/letmeNo1/PyAudioDeviceCmdlets",
     packages=setuptools.find_packages(),
     package_data={
-        'pyaudiodevice': ['lib/AudioDeviceCmdlets.dll']
+        'pyaudiodevice': ['*.pyi', 'lib/AudioDeviceCmdlets.dll']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
