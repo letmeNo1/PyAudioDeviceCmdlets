@@ -1,0 +1,5 @@
+
+build/*
+dist/*
+.idea/*
+pyaudiodevice.egg-info/*
