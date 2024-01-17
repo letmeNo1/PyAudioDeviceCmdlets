@@ -15,9 +15,7 @@ Set volume and mute state of default communication audio device (playback/record
 
 
 ## Installation
-Run as administrator
-```PowerShell
-Install-Module -Name AudioDeviceCmdlets
+pip install pyaudiodevice
 ```
 
 
