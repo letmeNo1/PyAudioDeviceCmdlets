@@ -26,7 +26,6 @@ class PyAudioDeviceCmdlets:
         elif value.lower() == "false":
             return False
         elif value.find("%") > 0:
-            print(value)
             return float(value.replace("%", ""))
         else:
             return value
