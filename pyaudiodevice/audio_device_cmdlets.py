@@ -36,6 +36,7 @@ class PyAudioDeviceCmdlets:
         for entry in entries:
             lines = entry.split('\n')
             for line in lines:
+
                 key, value = re.split(r'\s*:\s*', line)
                 entry_dict[key.strip()] = self._convert_value(value)
         return entry_dict

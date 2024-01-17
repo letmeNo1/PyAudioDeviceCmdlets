@@ -13,7 +13,6 @@ class AudioCommon(PyAudioDeviceCmdlets):
         data = self._exec_powershell(f"{self._import} {powershell_command}")
         return self._format_data(data)
 
-
     """
     Get the device with the ID corresponding to the given <string>
     """
@@ -49,7 +48,7 @@ class AudioCommon(PyAudioDeviceCmdlets):
             for line in lines:
                 key, value = re.split(r'\s*:\s*', line)
                 entry_dict[key.strip()] = self._convert_value(value)
-            name = entry_dict.get('Name')
+            name = f"{entry_dict.get('Name')}:{entry_dict.get('Type')}"
             if name:
                 result_dict[name] = entry_dict
         return result_dict
@@ -83,28 +82,28 @@ class AudioCommon(PyAudioDeviceCmdlets):
     Set the device with the ID corresponding to the given <string> as both the default device and the default communication device, for its type
     '''
 
-    def set_default_communication_device_by_name(self, name: str):
+    def set_default_communication_device_by_name(self, name: str, device_type="Playback"):
         device_list = self.get_audio_device_list()
-        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(name).get('ID')}"'''
+        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(f"{name}:{device_type}").get('ID')}"'''
         self._exec_powershell(f"{self._import} {powershell_command}")
 
     '''
     Set the device with the ID corresponding to the given <string> as the default communication device and not the default device, for its type
     '''
 
-    def set_communication_only_device_by_name(self, name: str):
+    def set_communication_only_device_by_name(self, name: str, device_type="Playback"):
         device_list = self.get_audio_device_list()
 
-        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(name).get('ID')}" -CommunicationOnly'''
+        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(f"{name}:{device_type}").get('ID')}" -CommunicationOnly'''
         self._exec_powershell(f"{self._import} {powershell_command}")
 
     '''
     Set the device with the ID corresponding to the given <string> as the default device and not the default communication device, for its type
     '''
 
-    def set_default_only_device_by_name(self, name: str):
+    def set_default_only_device_by_name(self, name: str, device_type="Playback"):
         device_list = self.get_audio_device_list()
-        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(name).get('ID')}" -DefaultOnly'''
+        powershell_command = f'''Set-AudioDevice -ID "{device_list.get(f"{name}:{device_type}").get('ID')}" -DefaultOnly'''
         self._exec_powershell(f"{self._import} {powershell_command}")
 
     '''
