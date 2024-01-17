@@ -3,7 +3,7 @@ import re
 from pyaudiodevice.audio_device_cmdlets import PyAudioDeviceCmdlets
 
 
-class Common(PyAudioDeviceCmdlets):
+class AudioCommon(PyAudioDeviceCmdlets):
     '''
     Get the default communication playback device as <AudioDevice>
     '''
