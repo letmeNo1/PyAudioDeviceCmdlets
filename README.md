@@ -16,7 +16,6 @@ Set volume and mute state of default communication audio device (playback/record
 
 ## Installation
 pip install pyaudiodevice
-```
 
 
 ## Usage
