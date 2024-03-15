@@ -6,7 +6,7 @@ import subprocess
 class PyAudioDeviceCmdlets:
     def __init__(self):
         self.path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib\AudioDeviceCmdlets.dll")
-        self._import = f"Import-Module {self.path};"
+        self._import = f'''Import-Module "{self.path}";'''
 
     def _exec_powershell(self, cmd):
         # 使用subprocess模块调用PowerShell

@@ -11,7 +11,7 @@ def parse_requirements(filename):
 
 setuptools.setup(
     name="pyaudiodevice",
-    version="1.0.4",
+    version="1.0.5",
     author="hank.huang",
     author_email="hank.huang550@gmail.com",
     description="python version developed based on AudioDeviceCmdlets.",

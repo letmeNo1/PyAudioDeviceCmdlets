@@ -7,7 +7,7 @@ class DefaultCommunicationPlayback(PyAudioDeviceCmdlets):
     def __init__(self):
         super().__init__()
         self.path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lib\AudioDeviceCmdlets.dll")
-        self._import = f"Import-Module {self.path};"
+        self._import = f'''Import-Module "{self.path}";'''
 
     '''
     Get the default communication recording device as <AudioDevice>
