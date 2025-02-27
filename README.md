@@ -40,10 +40,10 @@ default_playback.set_volume(0.5)
 ```
 
 ```
-from pyaudiodevice.common import Common
+from pyaudiodevice.audio_common import AudioCommon
 
 # Create an instance of DefaultPlayback
-common = Common()
+common = AudioCommon()
 
 # Get the default playback device as <AudioDevice>
 default_device = common.get_default_device()
