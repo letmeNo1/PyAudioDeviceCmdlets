@@ -12,6 +12,27 @@ class AudioCommon(PyAudioDeviceCmdlets):
         powershell_command = "Get-AudioDevice -PlaybackCommunication"
         data = self._exec_powershell(f"{self._import} {powershell_command}")
         return self._format_data(data)
+    
+
+    '''
+    Get the default speaker device as <AudioDevice>
+    '''
+
+    def get_default_speaker_device(self):
+        powershell_command = "Get-AudioDevice -PlaybackCommunication"
+        data = self._exec_powershell(f"{self._import} {powershell_command}")
+        return self._format_data(data)
+    
+
+    '''
+    Get the default micphone device as <AudioDevice>
+    '''
+
+    def get_default_mic_device(self):
+        powershell_command = "Get-AudioDevice -RecordingCommunication"
+        data = self._exec_powershell(f"{self._import} {powershell_command}")
+        return self._format_data(data)
+
 
     """
     Get the device with the ID corresponding to the given <string>
