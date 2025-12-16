@@ -9,7 +9,7 @@ class AudioCommon(PyAudioDeviceCmdlets):
     '''
 
     def get_default_device(self):
-        powershell_command = "Get-AudioDevice -PlaybackCommunication"
+        powershell_command = "Get-AudioDevice -Playback"
         data = self._exec_powershell(f"{self._import} {powershell_command}")
         return self._format_data(data)
     
@@ -19,7 +19,7 @@ class AudioCommon(PyAudioDeviceCmdlets):
     '''
 
     def get_default_speaker_device(self):
-        powershell_command = "Get-AudioDevice -PlaybackCommunication"
+        powershell_command = "Get-AudioDevice -Playback"
         data = self._exec_powershell(f"{self._import} {powershell_command}")
         return self._format_data(data)
     
@@ -29,7 +29,7 @@ class AudioCommon(PyAudioDeviceCmdlets):
     '''
 
     def get_default_mic_device(self):
-        powershell_command = "Get-AudioDevice -RecordingCommunication"
+        powershell_command = "Get-AudioDevice -Recording"
         data = self._exec_powershell(f"{self._import} {powershell_command}")
         return self._format_data(data)
 
