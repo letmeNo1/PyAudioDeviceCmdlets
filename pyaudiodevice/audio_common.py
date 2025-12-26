@@ -56,6 +56,7 @@ class AudioCommon(PyAudioDeviceCmdlets):
     Get a list of all enabled devices as <AudioDevice>
     '''
 
+
     def get_audio_device_list(self):
         powershell_command = "Get-AudioDevice -List"
         data = self._exec_powershell(f"{self._import} {powershell_command}")
@@ -64,14 +65,48 @@ class AudioCommon(PyAudioDeviceCmdlets):
         result_dict = {}
 
         for entry in entries:
+            if not entry.strip():
+                continue  # 跳过空条目
+            
             entry_dict = {}
             lines = entry.split('\n')
+            current_key = None
+            current_value = []
+            
             for line in lines:
-                key, value = re.split(r'\s*:\s*', line)
-                entry_dict[key.strip()] = self._convert_value(value)
-            name = f"{entry_dict.get('Name')}:{entry_dict.get('Type')}"
-            if name:
+                line = line.strip()
+                if not line:
+                    continue  # 跳过空行
+                
+                # 匹配 "Key : Value" 格式（只分割第一个冒号）
+                colon_pos = line.find(':')
+                if colon_pos != -1:
+                    # 处理上一个未完成的键值对
+                    if current_key is not None and current_value:
+                        entry_dict[current_key] = self._convert_value(' '.join(current_value))
+                        current_value = []
+                    
+                    # 提取新的键和值
+                    current_key = line[:colon_pos].strip()
+                    value_part = line[colon_pos+1:].strip()
+                    if value_part:
+                        current_value.append(value_part)
+                else:
+                    # 处理续行（无冒号的行，拼接至当前值）
+                    if current_key is not None:
+                        current_value.append(line.strip())
+            
+            # 保存最后一个键值对
+            if current_key is not None and current_value:
+                entry_dict[current_key] = self._convert_value(' '.join(current_value))
+            
+            # 生成设备唯一标识并加入结果
+            dev_name = entry_dict.get('Name', 'Unknown')
+            dev_type = entry_dict.get('Type', 'Unknown')
+            name = f"{dev_name}:{dev_type}"
+            if name and name != "Unknown:Unknown":
                 result_dict[name] = entry_dict
+
         return result_dict
 
     '''
